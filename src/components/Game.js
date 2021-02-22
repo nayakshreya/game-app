@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 
 import RandomNumber from './RandomNumber';
 import shuffle from 'lodash.shuffle';
@@ -105,9 +105,14 @@ class Game extends React.Component {
                     ))}
                 </View>
                 {this.gameStatus !== 'PLAYING' && (
-                    <Button title="Play Again" onPress={this.props.onPlayAgain} />
+                    <TouchableOpacity
+                        style={styles.appButton}
+                        onPress={this.props.onPlayAgain}
+                    >
+                        <Text style={styles.buttonText}>Play Again</Text>
+                    </TouchableOpacity>
                 )}
-                <Text>{this.state.remainingSeconds}</Text>
+                <Text style={styles.timer}>{this.state.remainingSeconds}</Text>
             </View>
         );
     }
@@ -118,19 +123,35 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#ddd'
     },
+    appButton: {
+        fontSize: 28,
+        color: "#fff",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase",
+        elevation: 8,
+        backgroundColor: "#17a0ff",
+        borderRadius: 10,
+        paddingVertical: 12,
+        paddingHorizontal: 14,
+    },
+    buttonText: {
+        fontSize: 30,
+    },
     target: {
         fontSize: 50,
         backgroundColor: '#bbb',
         marginHorizontal: 50,
         marginTop: 100,
         marginBottom: 40,
-        textAlign: 'center'
+        textAlign: 'center',
+        borderRadius: 5,
     },
     randomContainer: {
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
     },
     STATUS_PLAYING: {
         backgroundColor: '#bbb',
@@ -141,6 +162,13 @@ const styles = StyleSheet.create({
     STATUS_LOST: {
         backgroundColor: 'red',
     },
+    timer: {
+        textAlign: 'center',
+        marginBottom: 50,
+        marginTop: 50,
+        fontSize: 50,
+    },
+    
   });
 
 export default Game;
